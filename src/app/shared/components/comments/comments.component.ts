@@ -10,11 +10,11 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   animations: [
     trigger('listItem',[
       state('default', style({transform:'scale(1)', 'background-color': 'white', 'z-index': 1})),
-      state('default', style({transform:'scale(1.05)', 'background-color': 'rgb(201,157,242)', 'z-index': 2})),
+      state('active', style({transform:'scale(1.05)', 'background-color': 'rgb(201,157,242)', 'z-index': 2})),
       transition('default => active',[animate('100ms ease-in-out')]),
       transition('active => default', [animate('500ms ease-in-out')]),
       transition('void => *', [
-        style({transform:'transformX(-100%)', opacity:0, 'background-color':'rgb(201,157,247)',}),
+        style({transform:'translateX(-100%)', opacity:0, 'background-color':'rgb(201,157,247)',}),
         animate('250ms ease-in-out', style({transform:'translateX(0)', opacity:1, 'background-color':'white'}))]
       )
     ])
@@ -25,7 +25,6 @@ export class CommentsComponent implements OnInit {
   @Output() newComment = new EventEmitter<string>;
   commentCtrl!: FormControl;
   // For animations
-  listItemAnimationState: 'default' | 'active' = 'default';
   animationStates: {[key: number]: 'default' | 'active'} = {};
 
   constructor(private formBuilder: FormBuilder) { }
