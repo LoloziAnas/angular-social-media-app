@@ -22,6 +22,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 })
 export class CommentsComponent implements OnInit {
   @Input() comments!: Comment[];
+  //Instantiate an Event Emitter of type string.
   @Output() newComment = new EventEmitter<string>;
   commentCtrl!: FormControl;
   // For animations
@@ -30,20 +31,25 @@ export class CommentsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    //Build a comment form control by formBuilder object
     this.commentCtrl = this.formBuilder.control('', [Validators.required, Validators.minLength(10)])
     for(let index in this.comments){
       this.animationStates[index] = 'default';
     }
   }
-
-
+  /*Method for leaving a comment in a specific post*/
   onLeaveComment() {
+    //If the form control not valid
     if(this.commentCtrl.invalid) return;
+    //Return the max identifier in post's comment
     const maxId = Math.max(...this.comments.map(comment => comment.id));
+    //Add the new comment to the beginning of the comment's array
     this.comments.unshift({
       id: maxId + 1, comment: this.commentCtrl.value, createdDate: new Date().toISOString(), userId: 1
     });
+    //Emit the event
     this.newComment.emit(this.commentCtrl.value);
+    //Reset the form control
     this.commentCtrl.reset();
   }
   onListItemMouseEnter(index: number){
