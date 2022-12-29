@@ -9,7 +9,6 @@ import {TimeAgoPipe} from "./pipes/TimeAgo.pipe";
 import {HighlightDirective} from "./directives/highlight.directive";
 
 
-
 @NgModule({
   declarations: [
     CommentsComponent,

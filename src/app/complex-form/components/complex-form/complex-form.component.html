@@ -1,0 +1,38 @@
+<mat-card class="main-form" [formGroup]="mainForm">
+  <mat-card-title>Inscription</mat-card-title>
+  <mat-card class="from-card" formGroupName="personalInfo">
+    <mat-card-subtitle>Personal Infos</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input type="text" name="firstName" id="firstName" formControlName="firstName" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input type="text" name="lastName" id="lastName" formControlName="lastName" matInput>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="from-card" [formGroup]="emailForm">
+    <mat-card-subtitle>How you like we contact you?</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Email Address</mat-label>
+        <input type="text"  name="firstName" id="email" formControlName="email" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input type="text" name="lastName" id="confirmEmail" formControlName="confirmEmail" matInput>
+      </mat-form-field>
+    </div>
+  </mat-card>
+  <mat-card class="from-card">Email</mat-card>
+  <mat-card class="from-card">Phone</mat-card>
+  <mat-card class="from-card">
+    <mat-card-subtitle>Info for login</mat-card-subtitle>
+  </mat-card>
+  <mat-card-actions *ngIf="mainForm.valid">
+    <button mat-flat-button color="primary" (click)="onSubmitForm()">Save</button>
+  </mat-card-actions>
+</mat-card>
