@@ -22,3 +22,46 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   exports: [HeaderComponent]
 })
 export class CoreModule { }
+/*
+* import {Comment} from "./comment.model";
+
+export class Post{
+  id!: number;
+  userId!: number;
+  title!: string;
+  createdDate!: string;
+  imageUrl!: string;
+  content!: string;
+  comments!: Comment[];
+}
+* */
+
+/*
+* export class ComplexFormValue{
+  personalInfo!:{
+    firstName: string,
+    lastName: string,
+  };
+  contactPreference!: string;
+  email?:{
+    email: string,
+    confirm: string
+  };
+  phone?: string;
+  loginInfo!:{
+    username: string,
+    password: string,
+    confirmedPassword: string
+  }
+}*/
+/*import {Comment} from "./comment.model";
+
+export class Post{
+  id!: number;
+  userId!: number;
+  title!: string;
+  createdDate!: string;
+  imageUrl!: string;
+  content!: string;
+  comments!: Comment[];
+}*/
