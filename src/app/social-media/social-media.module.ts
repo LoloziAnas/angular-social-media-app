@@ -8,7 +8,9 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { PostListItemComponent } from './components/post-list-item/post-list-item.component';
 import {SharedModule} from "../shared/shared.module";
 
-
+/*
+* social-media
+* */
 @NgModule({
   declarations: [
     PostListComponent,
