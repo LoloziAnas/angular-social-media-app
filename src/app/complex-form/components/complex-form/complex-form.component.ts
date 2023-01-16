@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {map, Observable, startWith, tap} from "rxjs";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -7,6 +8,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./complex-form.component.scss']
 })
 export class ComplexFormComponent implements OnInit {
+  // Initialize Form Main attributes
   mainForm!: FormGroup;
   personalInfoForm!: FormGroup;
   contactPreferenceCtrl!: FormControl;
@@ -14,15 +16,20 @@ export class ComplexFormComponent implements OnInit {
   emailCtrl!: FormControl;
   confirmEmailCtrl!: FormControl;
   emailForm!: FormGroup;
+  usernameCtrl!:FormControl;
   passwordCtrl!: FormControl;
   confirmPasswordCtrl!: FormControl;
   loginInfoForm!: FormGroup;
+  // Initialize observables
+  showEmailCtrl$!: Observable<boolean>;
+  showPhoneCtrl$!: Observable<boolean>;
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initFormControls();
     this.initMainForm();
+    this.initFormObservables();
   }
 
   private initMainForm(): void{
@@ -51,14 +58,45 @@ export class ComplexFormComponent implements OnInit {
     this.passwordCtrl = this.formBuilder.control('',Validators.required);
     this.confirmPasswordCtrl = this.formBuilder.control('',Validators.required);
     this.loginInfoForm = this.formBuilder.group({
+      username: this.usernameCtrl,
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl
     });
 
-
+  }
+  private initFormObservables(){
+    this.showEmailCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
+      startWith(this.contactPreferenceCtrl.value),
+      map(preference => preference === 'email'),
+      tap(showEmailCtrl => this.setEmailValidators(showEmailCtrl))
+    );
+    this.showPhoneCtrl$ = this.contactPreferenceCtrl.valueChanges.pipe(
+      startWith(this.contactPreferenceCtrl.value),
+      map(preference => preference === 'phone'),
+      tap(showPhoneCtrl => this.setPhoneValidators(showPhoneCtrl))
+    );
+  }
+  private setPhoneValidators(showPhoneCtrl:boolean){
+    if(showPhoneCtrl){
+      this.phoneCtrl.addValidators([Validators.required, Validators.minLength(10), Validators.maxLength(10)]);
+    }else {
+      this.phoneCtrl.clearValidators();
+    }
+    this.phoneCtrl.updateValueAndValidity();
+  }
+  private setEmailValidators(showEmailCtrl:boolean){
+    if(showEmailCtrl){
+      this.emailCtrl.addValidators([Validators.required, Validators.email]);
+      this.confirmEmailCtrl.addValidators([Validators.required, Validators.email]);
+    }else{
+      this.emailCtrl.clearValidators();
+      this.confirmEmailCtrl.clearValidators();
+    }
+    this.emailCtrl.updateValueAndValidity();
+    this.confirmEmailCtrl.updateValueAndValidity();
 
   }
   onSubmitForm() {
-
+    console.log(this.mainForm.value);
   }
 }

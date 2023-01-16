@@ -1,7 +1,7 @@
 <mat-card class="main-form" [formGroup]="mainForm">
   <mat-card-title>Inscription</mat-card-title>
   <mat-card class="from-card" formGroupName="personalInfo">
-    <mat-card-subtitle>Personal Infos</mat-card-subtitle>
+    <mat-card-subtitle>Personal Info</mat-card-subtitle>
     <div class="form-row">
       <mat-form-field appearance="fill">
         <mat-label>First Name</mat-label>
@@ -14,25 +14,53 @@
     </div>
   </mat-card>
 
-  <mat-card class="from-card" [formGroup]="emailForm">
+  <mat-card class="form-card">
     <mat-card-subtitle>How you like we contact you?</mat-card-subtitle>
+    <mat-radio-group [formControl]="contactPreferenceCtrl">
+      <mat-radio-button value="email">Email</mat-radio-button>
+      <mat-radio-button value="phone">Phone</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+  <mat-card class="form-card" [formGroup]="emailForm">
+    <mat-card-subtitle>Email</mat-card-subtitle>
     <div class="form-row">
       <mat-form-field appearance="fill">
         <mat-label>Email Address</mat-label>
-        <input type="text"  name="firstName" id="email" formControlName="email" matInput>
+        <input type="text"  name="email" id="email" formControlName="email" matInput>
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>Last Name</mat-label>
-        <input type="text" name="lastName" id="confirmEmail" formControlName="confirmEmail" matInput>
+        <mat-label>Confirm Email</mat-label>
+        <input type="text" name="confirmEmail" id="confirmEmail" formControlName="confirmEmail" matInput>
       </mat-form-field>
     </div>
   </mat-card>
-  <mat-card class="from-card">Email</mat-card>
-  <mat-card class="from-card">Phone</mat-card>
-  <mat-card class="from-card">
-    <mat-card-subtitle>Info for login</mat-card-subtitle>
+  <mat-card class="form-card">
+    <mat-card-subtitle>Phone</mat-card-subtitle>
+    <mat-form-field appearance="fill">
+      <mat-label>Phone number</mat-label>
+      <input type="text" name="phone" id="phone" [formControl]="phoneCtrl" matInput>
+    </mat-form-field>
   </mat-card>
+  <mat-card class="form-card" [formGroup]="loginInfoForm">
+    <mat-card-subtitle>Info for login</mat-card-subtitle>
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input type="text" name="username" id="username" formControlName="username" matInput>
+    </mat-form-field>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" name="password" id="password" formControlName="password" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Confirm password</mat-label>
+        <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" matInput>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
   <mat-card-actions *ngIf="mainForm.valid">
     <button mat-flat-button color="primary" (click)="onSubmitForm()">Save</button>
   </mat-card-actions>
+
 </mat-card>
