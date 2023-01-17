@@ -6,10 +6,12 @@
       <mat-form-field appearance="fill">
         <mat-label>First Name</mat-label>
         <input type="text" name="firstName" id="firstName" formControlName="firstName" matInput>
+        <mat-error>This field is required</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Last Name</mat-label>
         <input type="text" name="lastName" id="lastName" formControlName="lastName" matInput>
+        <mat-error>This field is required</mat-error>
       </mat-form-field>
     </div>
   </mat-card>
@@ -27,10 +29,12 @@
       <mat-form-field appearance="fill">
         <mat-label>Email Address</mat-label>
         <input type="text"  name="email" id="email" formControlName="email" matInput>
+        <mat-error>{{getFormControlErrorText(emailCtrl)}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Confirm Email</mat-label>
         <input type="text" name="confirmEmail" id="confirmEmail" formControlName="confirmEmail" matInput>
+        <mat-error>{{getFormControlErrorText(confirmEmailCtrl)}}</mat-error>
       </mat-form-field>
     </div>
   </mat-card>
@@ -39,6 +43,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Phone number</mat-label>
       <input type="text" name="phone" id="phone" [formControl]="phoneCtrl" matInput>
+      <mat-error>{{getFormControlErrorText(phoneCtrl)}}</mat-error>
     </mat-form-field>
   </mat-card>
   <mat-card class="form-card" [formGroup]="loginInfoForm">
@@ -46,21 +51,24 @@
     <mat-form-field appearance="fill">
       <mat-label>Username</mat-label>
       <input type="text" name="username" id="username" formControlName="username" matInput>
+      <mat-error>This field is required</mat-error>
     </mat-form-field>
     <div class="form-row">
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
         <input type="password" name="password" id="password" formControlName="password" matInput>
+        <mat-error>This field is required</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Confirm password</mat-label>
         <input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" matInput>
+        <mat-error>This field is required</mat-error>
       </mat-form-field>
     </div>
   </mat-card>
 
   <mat-card-actions *ngIf="mainForm.valid">
-    <button mat-flat-button color="primary" (click)="onSubmitForm()">Save</button>
+    <button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">SAVE</button>
   </mat-card-actions>
-
+  <mat-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-spinner>
 </mat-card>

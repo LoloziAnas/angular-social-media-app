@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {map, Observable, startWith, tap} from "rxjs";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators, AbstractControl} from "@angular/forms";
 
 @Component({
   selector: 'app-complex-form',
@@ -20,6 +20,8 @@ export class ComplexFormComponent implements OnInit {
   passwordCtrl!: FormControl;
   confirmPasswordCtrl!: FormControl;
   loginInfoForm!: FormGroup;
+  //
+  loading = false;
   // Initialize observables
   showEmailCtrl$!: Observable<boolean>;
   showPhoneCtrl$!: Observable<boolean>;
@@ -97,6 +99,21 @@ export class ComplexFormComponent implements OnInit {
 
   }
   onSubmitForm() {
+    this.loading = true;
     console.log(this.mainForm.value);
+
+  }
+  getFormControlErrorText(ctrl:AbstractControl){
+    if(ctrl.hasError('required')){
+      return 'This field is required';
+    }else if(ctrl.hasError('email')){
+      return 'Please enter an email valid ';
+    }else if(ctrl.hasError('minlength')){
+      return 'This Phone number does not contain enough digits';
+    }else if(ctrl.hasError('maxlength')){
+      return 'This phone number contains too many digits';
+    }else{
+      return 'This field contains an error'
+    }
   }
 }
