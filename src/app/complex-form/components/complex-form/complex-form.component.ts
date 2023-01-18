@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {map, Observable, startWith, tap} from "rxjs";
 import {FormBuilder, FormControl, FormGroup, Validators, AbstractControl} from "@angular/forms";
+import {ComplexFormService} from "../../../core/services/complexForm.service";
 
 @Component({
   selector: 'app-complex-form',
@@ -26,7 +27,7 @@ export class ComplexFormComponent implements OnInit {
   showEmailCtrl$!: Observable<boolean>;
   showPhoneCtrl$!: Observable<boolean>;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private complexFormService: ComplexFormService) { }
 
   ngOnInit(): void {
     this.initFormControls();

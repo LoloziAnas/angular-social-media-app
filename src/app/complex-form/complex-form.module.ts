@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ComplexFormRoutingModule } from './complex-form-routing.module';
 import { ComplexFormComponent } from './components/complex-form/complex-form.component';
 import {SharedModule} from "../shared/shared.module";
-import {ComplexFormService} from "../core/services/ComplexFormService";
+import {ComplexFormService} from "../core/services/complexForm.service";
 
 
 @NgModule({
