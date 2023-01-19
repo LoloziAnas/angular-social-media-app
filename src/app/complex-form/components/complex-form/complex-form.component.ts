@@ -106,15 +106,18 @@ export class ComplexFormComponent implements OnInit {
       tap(saved => {
         loading = false;
         if(saved){
-          console.log('User saved successfull');
-          this.mainForm.reset();
-          this.contactPreferenceCtrl.patchValue('email');
+          console.log('User saved successfully');
+          this.resetForm();
         }else{
           console.log('User not saved: error case');
           console.error('Error in saving');
         }
       })
     ).subscribe();
+  }
+  private resetForm(){
+    this.mainForm.reset();
+    this.contactPreferenceCtrl.patchValue('email');
   }
   getFormControlErrorText(ctrl:AbstractControl){
     if(ctrl.hasError('required')){
