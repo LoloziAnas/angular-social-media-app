@@ -102,7 +102,9 @@ export class ComplexFormComponent implements OnInit {
   onSubmitForm() {
     this.loading = true;
     console.log(this.mainForm.value);
+    this.complexFormService.saveUserInfo(this.mainForm.value).pipe(
 
+    );
   }
   getFormControlErrorText(ctrl:AbstractControl){
     if(ctrl.hasError('required')){
