@@ -89,7 +89,7 @@ export class ComplexFormComponent implements OnInit {
   }
   private setEmailValidators(showEmailCtrl:boolean){
     if(showEmailCtrl){
-      this.emailCtrl.addValidators([Validators.required, Validators.email]);
+      this.emailCtrl.addValidators([Validators.required, Validators.email, validValidator()]);
       this.confirmEmailCtrl.addValidators([Validators.required, Validators.email]);
     }else{
       this.emailCtrl.clearValidators();
@@ -128,6 +128,8 @@ export class ComplexFormComponent implements OnInit {
       return 'This Phone number does not contain enough digits';
     }else if(ctrl.hasError('maxlength')){
       return 'This phone number contains too many digits';
+    }else if(ctrl.hasError('validValidator')){
+      return 'This text does not contain the word VALID';
     }else{
       return 'This field contains an error'
     }
