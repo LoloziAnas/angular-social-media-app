@@ -56,6 +56,8 @@ export class ComplexFormComponent implements OnInit {
     this.emailForm = this.formBuilder.group({
       email: this.emailCtrl,
       confirmEmail: this.confirmEmailCtrl
+    },{
+      validators:[validators: [confirmEqualValidator('email', 'confirmEmail')]]
     });
 
     this.passwordCtrl = this.formBuilder.control('',Validators.required);
@@ -64,6 +66,8 @@ export class ComplexFormComponent implements OnInit {
       username: this.usernameCtrl,
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl
+    }, {
+      validators:[validators: [confirmEqualValidator('password', 'confirmPassword')]]
     });
 
   }
