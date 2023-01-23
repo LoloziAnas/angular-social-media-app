@@ -26,6 +26,8 @@ export class ComplexFormComponent implements OnInit {
   // Initialize observables
   showEmailCtrl$!: Observable<boolean>;
   showPhoneCtrl$!: Observable<boolean>;
+  showEmailError$!: Observable<boolean>;
+  showPasswordError$!: Observable<boolean>;
 
   constructor(private formBuilder: FormBuilder, private complexFormService: ComplexFormService) { }
 
@@ -81,6 +83,12 @@ export class ComplexFormComponent implements OnInit {
       startWith(this.contactPreferenceCtrl.value),
       map(preference => preference === 'phone'),
       tap(showPhoneCtrl => this.setPhoneValidators(showPhoneCtrl))
+    );
+    this.showEmailError$ = this.emailForm.statusChange.pipe(
+      map(status => status === 'INVALID')
+    );
+    this.showPasswordError$ = this.loginInfoForm.pipe(
+      map(status => status ==== 'INVALID' && this.passwordCtrl.value && this.confirmPasswordCtrl.value && this.loginInfoForm.hasError('confirmEqual') )
     );
   }
   private setPhoneValidators(showPhoneCtrl:boolean){
