@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {map, Observable, startWith, tap} from "rxjs";
 import {FormBuilder, FormControl, FormGroup, Validators, AbstractControl} from "@angular/forms";
 import {ComplexFormService} from "../../../core/services/complexForm.service";
+import {validValidator} from "../../validators/valid.validator";
+import {confirmEqualValidator} from "../../validators/confirm-equal.validator";
 
 @Component({
   selector: 'app-complex-form',
@@ -59,7 +61,7 @@ export class ComplexFormComponent implements OnInit {
       email: this.emailCtrl,
       confirmEmail: this.confirmEmailCtrl
     },{
-      validators:[validators: [confirmEqualValidator('email', 'confirmEmail')]]
+      validators:[Validators: [confirmEqualValidator('email', 'confirmEmail')],]
     });
 
     this.passwordCtrl = this.formBuilder.control('',Validators.required);
@@ -69,7 +71,7 @@ export class ComplexFormComponent implements OnInit {
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl
     }, {
-      validators:[validators: [confirmEqualValidator('password', 'confirmPassword')]]
+      validators:[Validators: [confirmEqualValidator('password', 'confirmPassword')]]
     });
 
   }
@@ -84,7 +86,7 @@ export class ComplexFormComponent implements OnInit {
       map(preference => preference === 'phone'),
       tap(showPhoneCtrl => this.setPhoneValidators(showPhoneCtrl))
     );
-    this.showEmailError$ = this.emailForm.statusChange.pipe(
+    this.showEmailError$ = this.emailForm.statusChanges.pipe(
       map(status => status === 'INVALID')
     );
     this.showPasswordError$ = this.loginInfoForm.pipe(
@@ -116,7 +118,7 @@ export class ComplexFormComponent implements OnInit {
     console.log(this.mainForm.value);
     this.complexFormService.saveUserInfo(this.mainForm.value).pipe(
       tap(saved => {
-        loading = false;
+        this.loading = false;
         if(saved){
           console.log('User saved successfully');
           this.resetForm();
