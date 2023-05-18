@@ -30,6 +30,7 @@ Follow these steps to get the application up and running on your local machine:
   git clone https://github.com/LoloziAnas/angular-social-media-app.git
 ```
 ## Contributing
+
 If you wish to contribute to this project, please follow these steps:
 
 - Fork the repository.
@@ -37,9 +38,11 @@ If you wish to contribute to this project, please follow these steps:
 - Make your changes and commit them.
 - Push your changes to your forked repository.
 - Submit a pull request detailing your changes.
-- 
+
 ## License
+
 This project is licensed under the MIT License.
 
 ## Acknowledgments
+
 This project was developed by Lolozi Anas. Special thanks to all contributors and open source projects that made this application possible.
