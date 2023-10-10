@@ -43,6 +43,3 @@ If you wish to contribute to this project, please follow these steps:
 
 This project is licensed under the MIT License.
 
-## Acknowledgments
-
-This project was developed by Lolozi Anas. Special thanks to all contributors and open source projects that made this application possible.
