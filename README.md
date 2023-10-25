@@ -39,7 +39,3 @@ If you wish to contribute to this project, please follow these steps:
 - Push your changes to your forked repository.
 - Submit a pull request detailing your changes.
 
-## License
-
-This project is licensed under the MIT License.
-
